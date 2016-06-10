@@ -1,12 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>pada-ui</groupId>
-  <artifactId>pada-ui</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <groupId>com.unq.estip</groupId>
+  <artifactId>pada-client</artifactId>
   <packaging>war</packaging>
-  
+  <version>0.0.1-SNAPSHOT</version>
+  <name>pada-client Maven Webapp</name>
+  <url>http://maven.apache.org</url>
   <dependencies>
-  		 <dependency>
+	     <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
             <version>7.4.5.v20110725</version>
@@ -27,12 +29,11 @@
             <version>2.5</version>
         </dependency>
   </dependencies>
-  
   <build>
+    <finalName>pada-client</finalName>
   
-    <sourceDirectory>src</sourceDirectory>
-    <plugins>
-    	   <plugin>
+  	<plugins>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
@@ -53,12 +54,11 @@
                             <goal>assemble</goal>
                         </goals>
                         <configuration>
-                        	
                             <assembleDirectory>target</assembleDirectory>
                             <generateRepository>true</generateRepository>
                             <programs>
                                 <program>
-                                    <mainClass>root.JettyServer</mainClass>
+                                    <mainClass>com.unq.estip.padaui.server.JettyServer</mainClass>
                                     <name>webapp</name>
                                 </program>
                             </programs>
@@ -66,14 +66,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-war-plugin</artifactId>
-	            <version>2.6</version>
-	            <configuration>
-	                <failOnMissingWebXml>false</failOnMissingWebXml>
-	            </configuration>
-       		 </plugin>
-    </plugins>
+  	</plugins>
   </build>
+  
+  
 </project>

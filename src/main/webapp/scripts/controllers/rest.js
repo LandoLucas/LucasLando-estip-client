@@ -22,7 +22,7 @@ angular.module('restClient', [])
 		http(
 				{
 					method : 'GET',
-					url : "http://localhost:8080/pada-server/rest" + path,
+					url : "https://pada-server.herokuapp.com/rest" + path,
 					headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'},
 					transformRequest : function(obj) {
 						var str = [];
@@ -49,7 +49,7 @@ angular.module('restClient', [])
 		http(
 				{
 					method : 'POST',
-					url : "http://localhost:8080/pada-server/rest" + path,
+					url : "https://pada-server.herokuapp.com/rest" + path, 
 					data : data,
 					headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'},
 					transformRequest : function(obj) {
@@ -75,7 +75,7 @@ angular.module('restClient', [])
 		http(
 				{
 					method : 'POST',
-					url : "http://localhost:8080/pada-server/rest" + path,
+					url : "https://pada-server.herokuapp.com/rest" + path,
 					data : data,
 					headers: {'Content-Type' : 'application/json; charset=utf-8'},
 				}

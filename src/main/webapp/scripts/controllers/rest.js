@@ -1,6 +1,16 @@
 angular.module('restClient', [])
-.factory('restClient', ['$http', function(http) {
+.factory('restClient', ['$http', '$location', function(http, location) {
 
+	var baseUrl = location.host();
+	
+	var apiUrl = "https://pada-server.herokuapp.com/rest";
+	
+	if( baseUrl === "localhost"){
+		apiUrl = "http://localhost:8080/pada-server/rest";
+	}
+
+	console.log(apiUrl);
+	
 	var defaultErrorCallback = function(response){
 		console.log(response);
 	};
@@ -22,7 +32,7 @@ angular.module('restClient', [])
 		http(
 				{
 					method : 'GET',
-					url : "https://pada-server.herokuapp.com/rest" + path,
+					url : apiUrl + path,
 					headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'},
 					transformRequest : function(obj) {
 						var str = [];
@@ -49,7 +59,7 @@ angular.module('restClient', [])
 		http(
 				{
 					method : 'POST',
-					url : "https://pada-server.herokuapp.com/rest" + path, 
+					url : apiUrl + path, 
 					data : data,
 					headers: {'Content-Type' : 'application/x-www-form-urlencoded; charset=utf-8'},
 					transformRequest : function(obj) {
@@ -75,7 +85,7 @@ angular.module('restClient', [])
 		http(
 				{
 					method : 'POST',
-					url : "https://pada-server.herokuapp.com/rest" + path,
+					url : apiUrl + path,
 					data : data,
 					headers: {'Content-Type' : 'application/json; charset=utf-8'},
 				}

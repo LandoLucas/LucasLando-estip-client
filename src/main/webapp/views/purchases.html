@@ -17,66 +17,46 @@
 			    <span class="help-block" ng-show="newPurchaseForm.date.$error.required && !newPurchaseForm.date.$pristine">Requerido</span>
 			</div>
 			  
-	      	<div class="form-group col-xs-3" ng-class="{'has-error': newPurchaseForm.ings.$invalid && !newPurchaseForm.ings.$pristine}">
-				<label for="singleSelect">Ingredientes:</label>
-				<select class="form-control" ng-model="newPurchase.ing" ng-options="ing as ing.name  + ' '+ ing.brand +' x'+ ing.quantity + ' ' + ing.unit for ing in allIngredients"></select>
-				<span class="help-block" ng-show="newPurchaseForm.ings.$error.required && !newPurchaseForm.ings.$pristine">Requerido</span>
-		    </div>
-	      
-	      	<div class="form-group col-xs-2" ng-class="{'has-error': newPurchaseForm.quantity.$invalid && !newPurchaseForm.quantity.$pristine}">
-				<label for="quantity">Cantidad:</label>
-				<input type="number" min="1" class="form-control" name="quantity" ng-model="newPurchase.quantity">
-			</div>
-			
 			<div class="form-group col-xs-2" ng-class="{'has-error': newPurchaseForm.price.$invalid && !newPurchaseForm.price.$pristine}">
 				<label for="price">Precio:</label>
-				<input type="number" class="form-control" name="price" ng-model="newPurchase.price" required>
+				<input type="number" min=0 class="form-control" name="price" ng-model="newPurchase.price" required>
 			</div>
 			
-			<button type="button" ng-click="addPurchase()" class="form-group col-xs-2 btn btn-sm btn-info" ng-disabled="!newPurchase.quantity || !newPurchase.ing">
-				<i class="glyphicon glyphicon-plus"> </i> Agregar ingrediente a la compra
-		    </button>
-		  	 
-		  	<table st-table="displayedCollection" ng-hide="!selectedIngredients.length" class="table table-striped table-condensed table-hover" st-safe-src="selectedIngredients">
+		  	<button type="button" ng-click="save()" class="form-group col-xs-2 btn btn-sm btn-success" ng-hide="editing" ng-disabled="newPurchaseForm.$invalid" >
+				Guardar compra
+			</button>  
+		</form>
+		
+			<table st-table="displayedCollection" ng-hide="!allPurchases.length" class="table table-striped table-condensed table-hover" st-safe-src="allPurchases">
 				<thead>
 					<tr>
-						<th st-sort="name">Ingrediente</th>
-						<th st-sort="quantity">Cantidad</th>
+						<th st-sort="store">Mercado</th>
+						<th st-sort="date">Fecha</th>
 						<th st-sort="price">Precio</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr st-select-row="selectedIngredient" ng-repeat="selectedIng in displayedCollection">
-						<td>{{selectedIng.name}}</td>
-						<td>{{selectedIng.quantity}}</td>
-						<td>{{selectedIng.price | currency}}</td>
-<!-- 						<td> -->
-<!-- 							<button type="button" ng-click="removeselectedIng(selectedIng)" class="btn btn-sm btn-danger"> -->
-<!-- 								<i class="glyphicon glyphicon-remove"> </i> -->
-<!-- 							</button> -->
-<!-- 						</td> -->
+					<tr st-select-row="selectedPurchase" ng-repeat="selectedPurchase in displayedCollection">
+						<td>{{selectedPurchase.store.name}}</td>
+						<td>{{selectedPurchase.date | date}}</td>
+						<td>{{selectedPurchase.price | currency}}</td>
+						<td>
+							<button type="button" ng-click="cancelEdition()" class="btn btn-sm btn-warning" ng-hide="!editing">
+								<i class="glyphicon glyphicon-remove-sign"> </i>
+						    </button> 
+						  	<button type="button" ng-click="startEditing(selectedPurchase)" class="btn btn-sm btn-primary" ng-hide="editing">
+								<i class="glyphicon glyphicon-edit"> </i>
+						    </button>
+						    <button type="button" ng-click="remove(selectedPurchase)" class="btn btn-sm btn-danger" ng-hide="editing">
+								<i class="glyphicon glyphicon-remove"> </i>
+							</button>
+					    </td> 
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<td>Precio Total Compra:</td> -->
-<!-- 						<td>{{totalPriceSelectedIngredients | currency}}</td> -->
-<!-- 						<td></td> -->
-<!-- 					</tr> -->
+					<tr>
+						<td></td>
+						<td></td>
+						<td>{{totalPrice | currency}}</td>
+					</tr>
 				</tbody>
 			</table> 
-		  	
-<!-- 		  	<button type="button" ng-click="cancelEdition()" class="saleButtons form-group col-xs-1  btn btn-sm btn-warning pull-right" ng-hide="!editing"> -->
-<!-- 				 Cancelar -->
-<!-- 		    </button>  -->
-<!-- 		  	<button type="button" ng-click="executeEdition()" class="saleButtons form-group col-xs-1  btn btn-sm btn-primary pull-right" ng-hide="!editing"> -->
-<!-- 				Editar pedido -->
-<!-- 		    </button>  -->
-<!-- 		  	<button type="button" ng-click="save()" class="saleButtons form-group col-xs-1 btn btn-sm btn-success pull-right" ng-hide="editing" ng-disabled="newPurchaseForm.$invalid || !selectedIngredients.length" > -->
-<!-- 				Salvar pedido -->
-<!-- 			</button>   -->
-		  	  
-		</div>
-		  
-	</form>
-
-
 </div>

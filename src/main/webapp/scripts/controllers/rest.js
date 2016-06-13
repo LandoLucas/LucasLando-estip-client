@@ -9,8 +9,6 @@ angular.module('restClient', [])
 		apiUrl = "http://localhost:8080/pada-server/rest";
 	}
 
-	console.log(apiUrl);
-	
 	var defaultErrorCallback = function(response){
 		console.log(response);
 	};

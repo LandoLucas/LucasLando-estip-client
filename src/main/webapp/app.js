@@ -1,4 +1,4 @@
-var padaApp = angular.module('padaApp', ['ngRoute','smart-table','ngAnimate', 'ui.bootstrap','restClient'], function($routeProvider, $locationProvider) {
+var padaApp = angular.module('padaApp', ['ngRoute','smart-table','ngAnimate', 'ui.bootstrap','restClient', 'ui.calendar'], function($routeProvider, $locationProvider) {
  
 	$routeProvider
 		.when('/sales', {
@@ -25,9 +25,13 @@ var padaApp = angular.module('padaApp', ['ngRoute','smart-table','ngAnimate', 'u
             templateUrl : 'views/purchases.html',
             controller: 'purchasesController'
         })
+        .when('/calendar', {
+            templateUrl : 'views/calendar.html',
+            controller: 'calendarController'
+        })
         .otherwise( { redirectTo: '/sales'} );
 
-    
+//    
 //    $locationProvider.html5Mode(true);
 });
 

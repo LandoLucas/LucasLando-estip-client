@@ -29,7 +29,7 @@ var padaApp = angular.module('padaApp', ['ngRoute','smart-table','ngAnimate', 'u
             templateUrl : 'views/calendar.html',
             controller: 'calendarController'
         })
-        .otherwise( { redirectTo: '/sales'} );
+        .otherwise( { redirectTo: '/calendar'} );
 
 //    
 //    $locationProvider.html5Mode(true);

@@ -1,4 +1,4 @@
-padaApp.controller('calendarController', ['$scope' ,'restClient', function(scope, restClient) {
+padaApp.controller('calendarController', ['$scope' ,'restClient', '$uibModal', function(scope, restClient, uibModal) {
 	
 	scope.events = [];
 	
@@ -9,11 +9,27 @@ padaApp.controller('calendarController', ['$scope' ,'restClient', function(scope
 	};
 	
 	scope.alertOnEventClick = function( date, jsEvent, view){
-        console.log(date.title + ' was clicked ' + date.id);
+		scope.sale = scope.allSales.find( function(s){return s.id === date.id} );
+		
+		var prices = scope.sale.products.map(function(p){return p.product.price * p.quantity});
+		scope.saleTotal = prices.reduce( function(x,y){ return x+y},0);
+		
+		var modalInstance = uibModal.open({
+			animation: scope.animationsEnabled,
+			scope: scope,
+			template:"	<div id='calendarModal'>{{sale.client.firstName}} {{sale.client.lastName}} 														" +
+					 "  	<ul ng-repeat='prod in sale.products'> 																						" +
+					 "  		<li>{{prod.product.name}} x {{prod.quantity}} {{prod.product.unit}} - {{prod.product.price * prod.quantity | currency}} </li>	" +
+					 "		</ul>																														" +
+					 "		<p>Total: {{saleTotal | currency}}</p>																				" +
+					 "	</div>																															",
+			controller: function(){}
+		});
     };
 	
 	scope.getAllSalesOk = function(response){
 		
+		scope.allSales = response;
 		var toEvent = function(sale){
 			var event = {
 				id: sale.id,

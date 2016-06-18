@@ -95,3 +95,7 @@ nav.purchases .purchases
 	margin-left: 15%;	
 }
 
+.modal-dialog{
+	padding-top: 25%;
+	width: 40%;
+}

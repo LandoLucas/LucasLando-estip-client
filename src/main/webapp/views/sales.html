@@ -86,8 +86,8 @@
 			    <div class="panel-heading">
 			      <h4 class="panel-title">
 			        <p href="#" ng-click="isCollapsed = !isCollapsed">
-			          {{sale.date | date:'dd/MM/yyyy HH:mm a'}} / {{sale.client.firstName}} {{sale.client.lastName}}
-			          <span class="pull-right">{{sale.state}}</span>
+			          #{{sale.id}} - {{sale.date | date:'dd/MM/yyyy HH:mm a'}} - {{sale.client.firstName}} {{sale.client.lastName}}
+			          <span class="pull-right">Estado: {{sale.state}}</span>
 			        </p>
 			      </h4>
 			    </div>

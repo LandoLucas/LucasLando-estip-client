@@ -31,9 +31,12 @@
 			  </div>
 		  </div>
 		  
-		  <button type="button" ng-click="save()" class="btn btn-sm btn-success pull-right" ng-disabled="newProdForm.$invalid || productAlreadyExists()">
-			<i class="glyphicon glyphicon-plus"> </i> Nuevo Producto
+		  <button type="button" ng-click="save()" class="btn btn-sm btn-success pull-right" ng-hide="editing" ng-disabled="newProdForm.$invalid || productAlreadyExists()">
+			<i class="glyphicon glyphicon-plus"> </i> Salvar producto
 		  </button>
+		  <button type="button" ng-click="save()" class="btn btn-sm btn-success pull-right" ng-hide="!editing" ng-disabled="newProdForm.$invalid">
+			<i class="glyphicon glyphicon-plus"> </i> Editar producto
+		  </button> 
 		  
 	</form>
 
@@ -58,7 +61,16 @@
 				<td>{{product.quantity}}</td>
 				<td>{{product.unit}}</td>
 				<td>
-					<button type="button" ng-click="removeProduct(product)" class="btn btn-sm btn-danger">
+					<button type="button" ng-click="cancelEdition()" uib-popover="Cancelar edicion" popover-trigger="mouseenter" 
+							class="btn btn-sm btn-warning" ng-hide="!editing">
+						<i class="glyphicon glyphicon-remove-sign"> </i>
+				    </button> 
+				  	<button type="button" ng-click="startEditing(product)" uib-popover="Editar" popover-trigger="mouseenter" 
+				  			class="btn btn-sm btn-primary" ng-hide="editing">
+						<i class="glyphicon glyphicon-edit"> </i>
+				    </button>
+					<button type="button" ng-click="removeProduct(product)" uib-popover="Remover" popover-trigger="mouseenter" 
+							class="btn btn-sm btn-danger">
 						<i class="glyphicon glyphicon-remove"> </i>
 					</button>
 				</td>

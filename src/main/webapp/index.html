@@ -24,6 +24,8 @@
 	<script type="text/javascript" src="vendor/calendar/fullcalendar/dist/gcal.js"></script>
 	<script type="text/javascript" src="vendor/calendar/fullcalendar/dist/lang/es.js"></script>
 	
+	<script type="text/javascript" src="vendor/Chart/dist/Chart.min.js"></script>
+	<script type="text/javascript" src="vendor/angular-chart/dist/angular-chart.min.js"></script>
 
  	<!-- Angular js initialization file -->
  	<script src="app.js"></script>
@@ -40,6 +42,7 @@
  	<script src="scripts/controllers/purchasesController.js"></script>
  	<script src="scripts/controllers/storesController.js"></script>
  	<script src="scripts/controllers/calendarController.js"></script>
+ 	<script src="scripts/controllers/statisticsController.js"></script>
  	
  	<!-- My styles -->
  	<link href="styles/pada.css" rel="stylesheet">
@@ -56,6 +59,7 @@
 			<a href="#/products" class="products" ng-click="active='products'">Productos</a>
 			<a href="#/clients" class="clients" ng-click="active='clients'">Clientes</a>
 			<a href="#/calendar" class="calendar" ng-click="active='calendar'">Calendario</a>
+			<a href="#/statistics" class="statistics" ng-click="active='statistics'">Estadisticas</a>
 		</nav>
 
 		<div ng-view></div>

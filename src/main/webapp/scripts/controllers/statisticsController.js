@@ -1,19 +1,84 @@
 padaApp.controller('statisticsController', ['$scope' ,'restClient', function(scope, restClient) {
 	
-	scope.getAllSalesOk = function(response){
-		scope.allSales = response;
-		
-		scope.thisYearSales = scope.allSales.filter( function(sale){ return new Date().getYear() === new Date(sale.date).getYear() } )
-		
-		scope.chartOne();
-		scope.chartTwo();
+	scope.salesObtained = false;
+	scope.purchasesObtained = false;
+	scope.monthlabels = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	
+	var maxYear = new Date().getFullYear();
+	var minYear = 2015;
+	scope.selectedYear = 2016;
+	
+	scope.years = [];
+	for(var i=minYear; i <= maxYear; i++){
+		scope.years.push(i);
+	}
+	
+	scope.update = function() { scope.drawCharts() }
+
+	scope.drawCharts = function(){
+		if( scope.salesObtained && scope.purchasesObtained){
+			scope.thisYearSales = scope.filterByYear(scope.selectedYear, scope.allSales);
+			scope.thisYearPurchases = scope.filterByYear(scope.selectedYear, scope.allPurchases);
+			
+			scope.chartOne();
+			scope.chartTwo();
+			scope.chartThree();
+		}
+	}
+	
+	scope.filterByYear = function(fullYear, data){
+		return data.filter( function(d){return fullYear.toString() === new Date(d.date).getFullYear().toString()} )
 	}
 	
 	
+	scope.chartThree = function(){
+		scope.igseries = ['Ingresos', 'Gastos'];
+		
+		var incomes = [];
+		for (var month = 0; month < 12; month++) {
+			var monthlySales = scope.thisYearSales.filter( function(sale){
+				return month === new Date(sale.date).getMonth();
+			} )
+			
+			var add = function(total, sale){ 
+				return sale.price + total
+			};
+			var monthlyTotal = monthlySales.reduce( add, 0);
+			incomes.push(monthlyTotal);
+		}
+		
+		var outcomes = [];
+		for (var month = 0; month < 12; month++) {
+			var monthlyPurchases = scope.thisYearPurchases.filter( function(p){
+				return month === new Date(p.date).getMonth();
+			} )
+			
+			var add = function(total, p){ 
+				return p.price + total
+			};
+			var monthlyTotal = monthlyPurchases.reduce( add, 0);
+			outcomes.push(monthlyTotal);
+		}
+		
+		
+		scope.igdata = [incomes, outcomes];
+		
+		scope.options = {
+			    scales: {
+			      yAxes: [
+			        {
+			          id: 'y-axis-1',
+			          type: 'linear',
+			          display: true,
+			          position: 'left'
+			        }	
+			      ]
+			    }
+		};
+	};
+	
 	scope.chartTwo = function(){
 		
-		scope.vm2016labels = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto",
-		                      "Septiembre","Octubre","Noviembre","Diciembre"];
 		scope.vm2016data = [];
 		for (var month = 0; month < 12; month++) {
 			
@@ -63,5 +128,21 @@ padaApp.controller('statisticsController', ['$scope' ,'restClient', function(sco
 		);
 	};
 	
+	
+	
+	
+	scope.getAllSalesOk = function(response){
+		scope.allSales = response;
+		scope.salesObtained = true;
+		scope.drawCharts();
+	}
+	
+	scope.getAllPuchasesOk = function(response){
+		scope.allPurchases = response;
+		scope.purchasesObtained = true;
+		scope.drawCharts();
+	}
+	
+	restClient.sendGetWithoutErrorCallback(scope.getAllPuchasesOk, '/purchase/all');
 	restClient.sendGetWithoutErrorCallback(scope.getAllSalesOk, '/sales/all');
 }]);	

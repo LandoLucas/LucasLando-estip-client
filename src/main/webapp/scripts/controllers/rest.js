@@ -1,15 +1,20 @@
-angular.module('restClient', [])
-.factory('restClient', ['$http', '$location', function(http, location) {
+angular.module('restClient', []).factory('restClient', ['$http', '$location', '$uibModal', function(http, location, uibModal) {
 
 	var baseUrl = location.host();
 	
-	var apiUrl = "https://pada-server.herokuapp.com/rest";
+	var apiUrl = "http://52.11.222.208:8080/pada-server/rest";
 	
 	if( baseUrl === "localhost"){
 		apiUrl = "http://localhost:8080/pada-server/rest";
 	}
 
 	var defaultErrorCallback = function(response){
+		
+		var modalInstance = uibModal.open({
+			template:"<p id='errorMessage'> Se produjo un error interno del servidor. Reintente luego por favor. </p>",
+			controller: function(){}
+		});
+		
 		console.log(response);
 	};
 	

@@ -87,7 +87,7 @@ padaApp.controller('productsController', ['$scope' ,'restClient', function(scope
 		scope.units = response
 	};
 	
-	restClient.sendGetWithoutErrorCallback(scope.getUnitsOk, '/ingredients/units');
+	restClient.sendGetWithoutErrorCallback(scope.getUnitsOk, '/products/units');
 	restClient.sendGetWithoutErrorCallback(scope.getAllOk, '/products/all');
 	
 	

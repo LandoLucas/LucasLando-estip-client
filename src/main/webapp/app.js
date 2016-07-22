@@ -5,10 +5,6 @@ var padaApp = angular.module('padaApp', ['ngRoute','smart-table','ngAnimate', 'u
         	templateUrl : 'views/sales.html',
         	controller: 'salesController'
 		})
-	    .when('/ingredients', {
-	        templateUrl : 'views/ingredients.html',
-	        controller: 'ingredientsController'
-	    })    
 	    .when('/products', {
             templateUrl : 'views/products.html',
             controller: 'productsController'

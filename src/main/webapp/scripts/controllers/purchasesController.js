@@ -26,7 +26,12 @@ padaApp.controller('purchasesController', ['$scope' ,'restClient', function(scop
 			date : scope.newPurchase.date,
 			price : scope.newPurchase.price
 		};
-		restClient.sendPostAsJsonWithoutErrorCallback(scope.getAllOk, data, '/purchase/save');
+		
+		var success = function(response){
+			restClient.sendGetWithoutErrorCallback(scope.getAllOk, '/purchase/all');
+		}
+		
+		restClient.sendPostAsJsonWithoutErrorCallback(success, data, '/purchase/save');
 		scope.cancelEdition();
 	}
 	
@@ -42,6 +47,8 @@ padaApp.controller('purchasesController', ['$scope' ,'restClient', function(scop
 	scope.getAllOk = function(response){
 		scope.allPurchases = response;
 		
+		console.log(scope.allPurchases);
+		
 		var price = function(e){return e.price};
 		var add = function(x,y){ return x + y};
 		var prices = response.map( price );
@@ -51,7 +58,12 @@ padaApp.controller('purchasesController', ['$scope' ,'restClient', function(scop
 	
 	//Borrar compra
 	scope.remove = function(p){
-		restClient.sendPostWithoutErrorCallback(scope.getAllOk, {id: p.id}, '/purchase/delete');
+		
+		var success = function(response){
+			restClient.sendGetWithoutErrorCallback(scope.getAllOk, '/purchase/all');
+		}
+
+		restClient.sendPostWithoutErrorCallback(success, {id: p.id}, '/purchase/delete');
 	};	
 	
 	scope.startEditing = function(p){

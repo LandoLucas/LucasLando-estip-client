@@ -19,6 +19,11 @@ angular.module('restClient', []).factory('restClient', ['$http', '$location', '$
 		if(response === "CLIENT_IN_USE"){
 			msg = "El cliente que intenta eliminar esta siendo utilizado por una o mas ventas. Debe eliminar esas ventas primero y luego eliminar el cliente."
 		}
+		
+		if(response === "STORE_IN_USE"){
+			msg = "El mercado que intenta eliminar esta siendo utilizado por una o mas compras. Debe eliminar esas compras primero y luego eliminar el mercado."
+		}
+		
 
 		var modalInstance = uibModal.open({
 			template:"<p id='errorMessage'>" + msg +"</p>",

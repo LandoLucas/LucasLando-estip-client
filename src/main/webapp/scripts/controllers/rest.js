@@ -10,18 +10,21 @@ angular.module('restClient', []).factory('restClient', ['$http', '$location', '$
 
 	var defaultErrorCallback = function(response){
 		
-		if(response === "RESOURCE_IN_USE"){
-			var modalInstance = uibModal.open({
-				template:"<p id='errorMessage'> El recurso que intenta eliminar esta siendo utilizado por una venta o compra." +
-						"Debe eliminar esas ventas o compras primero.</p>",
-				controller: function(){}
-			});
-		}else{
-			var modalInstance = uibModal.open({
-				template:"<p id='errorMessage'> Se produjo un error interno del servidor. Reintente luego por favor. </p>",
-				controller: function(){}
-			})
-		};
+		var msg = "El recurso que intenta eliminar esta siendo utilizado por una venta o compra.";
+		
+		if(response === "PRODUCT_IN_USE"){
+			msg = "El producto que intenta eliminar esta siendo utilizado por una o mas ventas. Debe eliminar esas ventas primero y luego eliminar el producto.";
+		}
+		
+		if(response === "CLIENT_IN_USE"){
+			msg = "El cliente que intenta eliminar esta siendo utilizado por una o mas ventas. Debe eliminar esas ventas primero y luego eliminar el cliente."
+		}
+
+		var modalInstance = uibModal.open({
+			template:"<p id='errorMessage'>" + msg +"</p>",
+			controller: function(){}
+		})
+	
 	};
 	
 	var sendGetWithoutErrorCallback = function(successCallback, path){

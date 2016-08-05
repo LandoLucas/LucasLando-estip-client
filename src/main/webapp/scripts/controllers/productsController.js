@@ -23,13 +23,7 @@ padaApp.controller('productsController', ['$scope' ,'restClient', function(scope
 					"quantity" : prod.quantity
 				   };
 		scope.removeOk = function(response) {
-			for(var i=0; i < scope.displayedCollection.length; i++){
-				if (scope.displayedCollection[i].name.toUpperCase() === prod.name.toUpperCase() &&
-					scope.displayedCollection[i].quantity === prod.quantity	
-				   ){ 
-					scope.displayedCollection.splice(i);
-				}
-			}
+			restClient.sendGetWithoutErrorCallback(scope.getAllOk, '/products/all');
 		};
 		restClient.sendPostWithoutErrorCallback(scope.removeOk, data, '/products/remove');
 	};

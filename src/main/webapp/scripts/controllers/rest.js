@@ -10,12 +10,18 @@ angular.module('restClient', []).factory('restClient', ['$http', '$location', '$
 
 	var defaultErrorCallback = function(response){
 		
-		var modalInstance = uibModal.open({
-			template:"<p id='errorMessage'> Se produjo un error interno del servidor. Reintente luego por favor. </p>",
-			controller: function(){}
-		});
-		
-		console.log(response);
+		if(response === "RESOURCE_IN_USE"){
+			var modalInstance = uibModal.open({
+				template:"<p id='errorMessage'> El recurso que intenta eliminar esta siendo utilizado por una venta o compra." +
+						"Debe eliminar esas ventas o compras primero.</p>",
+				controller: function(){}
+			});
+		}else{
+			var modalInstance = uibModal.open({
+				template:"<p id='errorMessage'> Se produjo un error interno del servidor. Reintente luego por favor. </p>",
+				controller: function(){}
+			})
+		};
 	};
 	
 	var sendGetWithoutErrorCallback = function(successCallback, path){

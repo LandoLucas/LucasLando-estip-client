@@ -10,7 +10,8 @@
     
     <link rel="stylesheet" href="vendor/calendar/fullcalendar/dist/fullcalendar.css"/>
     <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <!-- My styles -->
+ 	<link href="styles/pada.css" rel="stylesheet">
     
     <!-- 3rd party stuff -->
     <script src="vendor/angular/angular.min.js"></script>
@@ -28,7 +29,6 @@
 	<script type="text/javascript" src="vendor/calendar/fullcalendar/dist/fullcalendar.min.js"></script>
 	<script type="text/javascript" src="vendor/calendar/fullcalendar/dist/gcal.js"></script>
 	<script type="text/javascript" src="vendor/calendar/fullcalendar/dist/lang/es.js"></script>
-	
 	<script type="text/javascript" src="vendor/Chart/dist/Chart.min.js"></script>
 	<script type="text/javascript" src="vendor/angular-chart/dist/angular-chart.min.js"></script>
 
@@ -40,6 +40,7 @@
  	<script src="scripts/controllers/auth.js"></script>
  	
  	<!-- My controllers -->
+ 	<script src="scripts/controllers/homeController.js"></script>
 	<script src="scripts/controllers/productsController.js"></script>
  	<script src="scripts/controllers/indexController.js"></script>
  	<script src="scripts/controllers/clientController.js"></script>
@@ -48,17 +49,12 @@
  	<script src="scripts/controllers/storesController.js"></script>
  	<script src="scripts/controllers/calendarController.js"></script>
  	<script src="scripts/controllers/statisticsController.js"></script>
- 		
  	<script src="scripts/controllers/loginController.js"></script>
- 	
- 	<!-- My styles -->
- 	<link href="styles/pada.css" rel="stylesheet">
- 	
  	
 </head>
 	
 	<body>
-		<nav class="{{active}}" ng-if="location.path() !== '/login'">
+		<nav class="{{active}}" ng-if="location.path() !== '/login'" ng-controller="homeController">
 			<a href="#/sales" class="sales" ng-click="active='sales'">Ventas</a>
 			<a href="#/purchases" class="purchases" ng-click="active='purchases'">Compras</a>
 			<a href="#/stores" class="stores" ng-click="active='stores'">Mercados</a>
@@ -66,6 +62,7 @@
 			<a href="#/clients" class="clients" ng-click="active='clients'">Clientes</a>
 			<a href="#/calendar" class="calendar" ng-click="active='calendar'">Calendario</a>
 			<a href="#/statistics" class="statistics" ng-click="active='statistics'">Estadisticas</a>
+			<a href="#/login" class="pull-right" ng-click="logout()">Logout!</a>
 		</nav>
 
 		<div ng-view></div>

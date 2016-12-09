@@ -80,9 +80,12 @@
 	 	
 	 	<input type="text" class="form-control" placeholder="Buscar" ng-model="searchText"/>
 	 	<input type="text" class="form-control" placeholder="Sub-busqueda" ng-model="searchText2" ng-hide="!searchText"/>
-	 	
+	 	<button class="btn btn-info btn-block" type="button" ng-click="hideDelivered = ! hideDelivered ; toggle = ! toggle">
+	 		<span ng-show="toggle">Ocultar ventas entregadas</span>
+    		<span ng-hide="toggle">Mostrar ventas entregadas</span>
+	 	</button>
 	  	<div ng-repeat="sale in sales | orderBy: sale.id | filter:searchText | filter:searchText2">
-		  	<div class="panel panel-default">
+		  	<div class="panel panel-default" ng-hide="hideDelivered" ng-show="! hideDelivered">
 			    <div class="panel-heading">
 			      <h4 class="panel-title">
 			        <p href="#" ng-click="isCollapsed = !isCollapsed">

@@ -1,5 +1,7 @@
 padaApp.controller('salesController', ['$scope' ,'restClient', function(scope, restClient) {
 	
+	scope.hideDelivered = true;
+	
 	scope.sortDate = function(sale) {
 	    return new Date(sale.date);
 	};

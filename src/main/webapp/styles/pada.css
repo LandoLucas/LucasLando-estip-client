@@ -1,3 +1,11 @@
+.loginForm{
+	background : url(../baking.jpg)
+}
+
+.vcenter {
+    margin-top: 15%;
+}
+
 .st-sort-ascent:before{
     content: '\25B2';
 }

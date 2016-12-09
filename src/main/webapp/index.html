@@ -53,7 +53,7 @@
  	
 </head>
 	
-	<body>
+	<body class="{{bodyClass}}">
 		<nav class="{{active}}" ng-if="location.path() !== '/login'" ng-controller="homeController">
 			<a href="#/sales" class="sales" ng-click="active='sales'">Ventas</a>
 			<a href="#/purchases" class="purchases" ng-click="active='purchases'">Compras</a>

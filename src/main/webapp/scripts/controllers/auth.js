@@ -8,7 +8,7 @@ angular.module('AuthenticationService', []).factory('AuthenticationService', ['B
             $timeout(function(){
                 var response = { success: username === 'test' && password === 'test' };
                 if(!response.success) {
-                    response.message = 'Username or password is incorrect';
+                    response.message = 'Credenciales incorrectas';
                 }
                 callback(response);
             }, 1000);

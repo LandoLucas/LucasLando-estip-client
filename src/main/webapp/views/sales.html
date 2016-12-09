@@ -81,7 +81,7 @@
 	 	<input type="text" class="form-control" placeholder="Buscar" ng-model="searchText"/>
 	 	<input type="text" class="form-control" placeholder="Sub-busqueda" ng-model="searchText2" ng-hide="!searchText"/>
 	 	
-	  	<div ng-repeat="sale in sales | orderBy: sortDate : false | filter:searchText | filter:searchText2">
+	  	<div ng-repeat="sale in sales | orderBy: sale.id | filter:searchText | filter:searchText2">
 		  	<div class="panel panel-default">
 			    <div class="panel-heading">
 			      <h4 class="panel-title">

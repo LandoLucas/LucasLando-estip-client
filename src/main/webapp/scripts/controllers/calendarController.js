@@ -48,8 +48,13 @@ padaApp.controller('calendarController', ['$scope' ,'restClient', '$uibModal', f
 			        height: 550,
 			        editable: true,
 			        header:{
-			          left: 'month agendaWeek agendaDay',
+//			          left: 'month agendaWeek agendaDay',
+//			          right: 'today prev,next'
+			        	  
+			          left: 'title',
+			          center: 'month agendaWeek agendaDay',
 			          right: 'today prev,next'
+			        	  
 			        },
 			        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 			        monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],

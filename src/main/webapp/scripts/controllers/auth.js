@@ -1,26 +1,21 @@
-angular.module('AuthenticationService', []).factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+angular.module('AuthenticationService', []).factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', 'restClient', function (Base64, $http, $cookieStore, $rootScope, restClient) {
         var service = {};
  
         service.Login = function (username, password, callback) {
  
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function(){
-                var response = { success: username === 'test' && password === 'test' };
-                if(!response.success) {
-                    response.message = 'Credenciales incorrectas';
-                }
-                callback(response);
-            }, 1000);
- 
- 
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
- 
+        	var loginOK = function(response){
+        		var response = {success : true};
+        		callback(response);
+        	}
+        	
+        	var error = function(response){
+        		var response = {success : false}
+        		response.message = 'Credenciales incorrectas';
+        		callback(response)
+        	}
+        	
+        	restClient.sendPost(loginOK, error,  { username: username, password: password }, '/login');
+        	
         };
   
         service.SetCredentials = function (username, password) {
@@ -33,14 +28,14 @@ angular.module('AuthenticationService', []).factory('AuthenticationService', ['B
                 }
             };
   
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Basic' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         };
   
         service.ClearCredentials = function () {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            $http.defaults.headers.common['Authorization'] = '';
         };
   
         return service;

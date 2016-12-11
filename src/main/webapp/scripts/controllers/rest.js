@@ -90,7 +90,6 @@ angular.module('restClient', []).factory('restClient', ['$http', '$location', '$
 		).success(function(response) {
 			successCallback(response);
 		}).error(function(response) {
-			console.log(response)
 			errorCallback(response);
 		});
 		

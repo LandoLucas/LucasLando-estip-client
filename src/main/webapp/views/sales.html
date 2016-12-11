@@ -85,7 +85,7 @@
     		<span ng-hide="toggle">Mostrar ventas entregadas</span>
 	 	</button>
 	  	<div ng-repeat="sale in sales | orderBy: sale.id | filter:searchText | filter:searchText2">
-		  	<div class="panel panel-default" ng-hide="hideDelivered" ng-show="! hideDelivered">
+		  	<div class="panel panel-default" ng-hide="{{sale.state === 'Entregado'}} && hideDelivered" ng-show="{{sale.state !== 'Entregado'}}">
 			    <div class="panel-heading">
 			      <h4 class="panel-title">
 			        <p href="#" ng-click="isCollapsed = !isCollapsed">
